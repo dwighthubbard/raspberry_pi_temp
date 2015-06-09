@@ -19,9 +19,9 @@ sql database;
    or when it is shutdown.  This results in a lot less wear on the
    sd-card.
 
-** The redislite module will install, configure and manage the redis
+**The redislite module will install, configure and manage the redis
 server.  So there is no need to deal with setting up a seperate redis
-server **
+server**
 
 The steps to use this script are:
 
