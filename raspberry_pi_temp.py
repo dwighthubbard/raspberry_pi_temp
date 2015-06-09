@@ -2,9 +2,10 @@
 from __future__ import print_function
 import os
 import glob
-import time
-import redislite
 from redis_collections import List as RedisList
+import redislite
+import sys
+import time
 
 
 # Redis RDB backing filename
@@ -70,12 +71,22 @@ def load_w1_modules():
     """
     Load the kernel modules (drivers) for the one wire temp sensor
     """
-    # Make sure the kernel modules to read the temp sensor are loaded
     os.system('modprobe w1-gpio')
     os.system('modprobe w1-therm')
 
     
 if __name__ == '__main__':
+    # Make sure we have the privileges to access the temp sensor
+    if os.geteuid() != 0:
+        print(
+            "Access to the temp sensor device requires root "
+            "privileges.  You might want to try running:\n\t"
+            "sudo {0}".format(' '.join(sys.argv)),
+            file=sys.stderr
+        )
+        sys.exit(1)
+            
+        
     # Load the kernel drivers for the temp sensor
     load_w1_modules()
     
