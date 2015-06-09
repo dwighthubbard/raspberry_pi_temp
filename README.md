@@ -21,7 +21,7 @@ sql database;
 
 ** The redislite module will install, configure and manage the redis
 server.  So there is no need to deal with setting up a seperate redis
-server ***
+server **
 
 The steps to use this script are:
 
