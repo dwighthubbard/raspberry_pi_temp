@@ -1,0 +1,44 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Temp Graph</title>
+        <!--[if lte IE 8]>
+            <script src="{% static 'js/excanvas.js' %}"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <h1>Raspberry Pi Temp Graph</h1>
+
+        <canvas id="chart" width="1024" height="768"></canvas>
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript">
+        var chartUpdate = function(value) {
+            console.log("Updating Chart: ", value);
+        
+            // Replace the chart canvas element
+            $('#chart').replaceWith('<canvas id="chart" width="1024" height="768"></canvas>');
+        
+            // Draw the chart
+            $.get('{% url "LineChartJSONView" %}', function(data) {
+                var ctx = $('#chart').get(0).getContext("2d");
+                new Chart(ctx).Line(data);
+            });
+        
+            // Schedule next chart update tick
+            setTimeout (function() { chartUpdate(value - 1); }, 5000);
+      }
+
+      $(document).ready(function() {
+        setTimeout (function() { chartUpdate(99); }, 5000);
+      })
+     {% comment %}	        
+     $.get('{% url "LineChartJSONView" %}', function(data) {
+        	    var ctx = $("#myChart").get(0).getContext("2d");
+                    new Chart(ctx).Line(data);
+                });
+     {% endcomment %}
+        </script>
+    </body>
+</html>

@@ -8,6 +8,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Editor junk files
+*~
+
 # Distribution / packaging
 .Python
 env/
