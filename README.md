@@ -31,7 +31,7 @@ for a good tutorial on how to do this)
 2. Install the redislite and redis-collections python modules using the
    python pip packgae manager.
 
-  $ pip install redislite redis-collctions
+  $ pip install redislite redis-collections
   
 3. Run the script as root
 
